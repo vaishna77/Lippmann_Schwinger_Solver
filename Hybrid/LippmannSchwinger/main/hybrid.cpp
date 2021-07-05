@@ -78,11 +78,13 @@ int main(int argc, char* argv[]) {
 	Vec APhi;
 	Vec r;
 	string filename0;
-	for (double pre_tol = 1e-2; pre_tol <= 1e-1; pre_tol*=1e+1)
-{
-	int pre_rank = 5;
-	cout << endl << "Begining HODLR pre-conditioner initialisation; pre_tol: " << pre_tol << endl;
-	HODLR* T = new HODLR(H_N, M, pre_tol, pre_rank);
+
+// 	for (double pre_tol = 1e-2; pre_tol <= 1e-1; pre_tol*=1e+1)
+// {
+// 	int pre_rank = 5;
+	// cout << endl << "Begining HODLR pre-conditioner initialisation; pre_tol: " << pre_tol << endl;
+	HODLR* T = new HODLR(H_N, M, pre_conditioner_tolerance, preconditioner_target_rank);
+	// HODLR* T = new HODLR(H_N, M, pre_tol, pre_rank);
 	// HODLR* T = new HODLR(H_N, M, pre_conditioner_tolerance, pre_rank);
   T->assemble(K, "rookPivoting", is_sym, is_pd);
 	start		=	omp_get_wtime();
@@ -120,9 +122,9 @@ int main(int argc, char* argv[]) {
 	}
 	myfile0.close();
 	std::cout << "Time taken by GMRES Solver 1,10: " << timeGMRES << std::endl << endl;
-	if (r.norm()/b.norm() < 1e-10) {
-		continue;
-	}
+	// if (r.norm()/b.norm() < 1e-10) {
+	// 	continue;
+	// }
 	//
 	start		=	omp_get_wtime();
   b_tilde = T->solve(b);
@@ -139,9 +141,9 @@ int main(int argc, char* argv[]) {
 	}
 	myfile0.close();
 	std::cout << "Time taken by GMRES Solver 2,10: " << timeGMRES << std::endl << endl;
-	if (r.norm()/b.norm() < 1e-10) {
-		continue;
-	}
+	// if (r.norm()/b.norm() < 1e-10) {
+	// 	continue;
+	// }
 	// ///////////////////////// GMRES without preconditioner ///////////////////////
 	// /////////////////////////////////////////////////////////////
 	//
@@ -160,9 +162,9 @@ int main(int argc, char* argv[]) {
 	}
 	myfile0.close();
 	std::cout << "Time taken by GMRES Solver 1,50: " << timeGMRES << std::endl << endl;
-	if (r.norm()/b.norm() < 1e-10) {
-		continue;
-	}
+	// if (r.norm()/b.norm() < 1e-10) {
+	// 	continue;
+	// }
 	// ///////////////////////// GMRES without preconditioner ///////////////////////
 	// /////////////////////////////////////////////////////////////
 	//
@@ -203,9 +205,9 @@ int main(int argc, char* argv[]) {
 	}
 	myfile0.close();
 	std::cout << "Time taken by GMRES Solver 1,100: " << timeGMRES << std::endl << endl;
-	if (r.norm()/b.norm() < 1e-10) {
-		continue;
-	}
+	// if (r.norm()/b.norm() < 1e-10) {
+	// 	continue;
+	// }
 
 
 	// start		=	omp_get_wtime();
@@ -243,7 +245,7 @@ int main(int argc, char* argv[]) {
 	// myfile0.close();
 	// std::cout << "Time taken by GMRES Solver 1,200: " << timeGMRES << std::endl << endl;
 	delete T;
-}
+// }
 // exit(0);
 cout << "------------------------------------------------------" << endl;
 	// start		=	omp_get_wtime();
