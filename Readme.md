@@ -1,10 +1,12 @@
-This repository has 3 projects to solve the Lippmann-Schwinger equation via volume integral equation using 3 techniques.
+This repository has 4 projects to solve the Lippmann-Schwinger equation via volume integral equation using 3 techniques.
 
 1. HODLR: HODLR based direct solver.
 
 2. GMRES: GMRES based iterative solver. The matrix-vector products encountered in each of its iteration have been computed using DAFMM (Directional Algebraic Fast Multipole Method). All the low rank factorisations encountered were formed using Nested Cross Approximation (NCA).
 
 3. Hybrid: GMRES based iterative solver with HODLR as pre-conditioner.
+
+4. GMRES_Hybrid: This is a new version of the code, where both GMRES and Hybrid solvers can be run from the same file. This also uses a different variant of GMRES routine. 
 
 For details on matrix assembly please refer the article [[1]](#1).
 
